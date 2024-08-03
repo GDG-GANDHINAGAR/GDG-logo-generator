@@ -1,0 +1,40 @@
+<div class="form">
+  <mat-card appearance="outlined">
+
+    <form action="" [formGroup]='form'>
+      <mat-form-field appearance="outline">
+        <mat-label>Community Name</mat-label>
+        <input matInput placeholder="GDG Phulera" formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Comunity food</mat-label>
+        <mat-select formControlName="type">
+          @for (community of communities; track community) {
+            <mat-option [value]="community.value">{{ community.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="isMonochrome">
+        Monochrome
+      </mat-slide-toggle>
+      @if (isMonochrome|async) {
+        <div class="color-picker">
+          <div class="label">
+            Logo Color
+          </div>
+          <ngx-colors
+            ngx-colors-trigger formControlName="color"></ngx-colors>
+        </div>
+        <div class="color-picker">
+          <div class="label">
+            Background Color
+          </div>
+          <ngx-colors
+            ngx-colors-trigger formControlName="bgColor"></ngx-colors>
+        </div>
+      }
+    </form>
+  </mat-card>
+
+</div>

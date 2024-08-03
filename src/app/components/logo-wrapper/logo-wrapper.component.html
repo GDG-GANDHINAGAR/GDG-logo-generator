@@ -1,0 +1,19 @@
+<mat-card appearance="outlined">
+
+<div class="logo">
+  @if (config.name) {
+    @switch (config.type) {
+      @case (Communities.GDG) {
+        <app-gdg-normal [config]="config"></app-gdg-normal>
+      }
+      @case (Communities.GDGC) {
+        <app-gdg-normal [config]="config"></app-gdg-normal>
+      }
+      @case (Communities.GDSC) {
+        <app-gdg-normal [config]="config"></app-gdg-normal>
+      }
+    }
+  }
+</div>
+
+</mat-card>
