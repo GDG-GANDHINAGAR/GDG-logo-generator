@@ -1,0 +1,23 @@
+.wrapper
+  display: flex
+  justify-content: center
+  align-items: center
+  max-width: 1200px
+  gap: 20px
+  margin: auto
+
+  @media(max-width: 600px)
+    flex-direction: column
+
+  .logo-wrap
+    flex: 0.7
+    @media(max-width: 600px)
+      width: 100%
+      flex: 1
+
+  .form-wrap
+    flex: 0.3
+    height: 100%
+    @media(max-width: 600px)
+      width: 100%
+      flex: 1

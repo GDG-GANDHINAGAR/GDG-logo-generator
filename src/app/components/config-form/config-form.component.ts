@@ -9,11 +9,13 @@ import {MatCard} from "@angular/material/card";
 import {NgxColorsModule} from "ngx-colors";
 import {AsyncPipe} from "@angular/common";
 import {ConfigService} from "../../services/config.service";
+import {MatButton} from "@angular/material/button";
+import {DefaultConfig} from "../../constants/defaults";
 
 @Component({
   selector: 'app-config-form',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, FormsModule, MatSlideToggleModule, MatSelectModule, MatCard, NgxColorsModule, AsyncPipe],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, FormsModule, MatSlideToggleModule, MatSelectModule, MatCard, NgxColorsModule, AsyncPipe, MatButton],
   templateUrl: './config-form.component.html',
   styleUrl: './config-form.component.sass'
 })
@@ -29,11 +31,12 @@ export class ConfigFormComponent {
   ]
   monoChrome: any;
   form: FormGroup = new FormGroup({
-    name: new FormControl('Phulera',),
-    type: new FormControl(this.communities[0].value),
-    isMonochrome: new FormControl(''),
-    color: new FormControl('#656c73'),
-    bgColor: new FormControl('#ffffff00'),
+    name: new FormControl(DefaultConfig.name,),
+    type: new FormControl(DefaultConfig.type),
+    isMonochrome: new FormControl(DefaultConfig.isMonochrome),
+    color: new FormControl(DefaultConfig.color),
+    bgColor: new FormControl(DefaultConfig.bgColor),
+    kind: new FormControl('')
   })
   isMonochrome = this.form.get('isMonochrome')?.valueChanges;
 
@@ -41,5 +44,13 @@ export class ConfigFormComponent {
     this.form.valueChanges.subscribe(change => {
       this.configService.setConfig(this.form.value)
     })
+  }
+
+  setBgTransparent() {
+    this.form.get('bgColor')?.setValue('#ffffff00')
+  }
+
+  triggerDownload(kind: 'svg' | 'png') {
+    this.configService.triggerDownload(kind)
   }
 }

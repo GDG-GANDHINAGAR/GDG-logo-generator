@@ -4,7 +4,7 @@
     <form action="" [formGroup]='form'>
       <mat-form-field appearance="outline">
         <mat-label>Community Name</mat-label>
-        <input matInput placeholder="GDG Phulera" formControlName="name">
+        <input matInput formControlName="name">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Comunity food</mat-label>
@@ -23,17 +23,25 @@
           <div class="label">
             Logo Color
           </div>
-          <ngx-colors
-            ngx-colors-trigger formControlName="color"></ngx-colors>
+
+          <div class="actions">
+            <ngx-colors ngx-colors-trigger formControlName="color"/>
+          </div>
         </div>
         <div class="color-picker">
           <div class="label">
             Background Color
           </div>
-          <ngx-colors
-            ngx-colors-trigger formControlName="bgColor"></ngx-colors>
+          <div class="actions">
+            <ngx-colors ngx-colors-trigger formControlName="bgColor"/>
+            <button mat-button (click)="setBgTransparent()">Transparent</button>
+          </div>
         </div>
       }
+      <div class="form-action">
+        <button mat-flat-button (click)="triggerDownload('png')">Download PNG</button>
+        <button mat-flat-button (click)="triggerDownload('svg')">Download SVG</button>
+      </div>
     </form>
   </mat-card>
 
