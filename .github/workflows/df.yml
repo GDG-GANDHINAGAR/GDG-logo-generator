@@ -40,3 +40,12 @@ jobs:
       - name: Copy Build Artifacts
         run: scp -i ~/.ssh/ed25519 -r dist/gdg-logogen/* ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }}:/var/www/apps/logo-generator
 
+      - name: Execute script on remote server
+        uses: appleboy/ssh-action@v2
+        with:
+          host: ${{ secrets.DF_HOST }}
+          username: ${{ secrets.DF_USER }}
+          key: ${{ secrets.DF_PKEY }}
+        script: |
+            cd var/www
+            bash install.sh
