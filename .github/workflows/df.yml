@@ -38,5 +38,5 @@ jobs:
           ssh-keyscan -p 22 -t ed25519 ${{ secrets.DF_HOST }} >> ~/.ssh/known_hosts
 
       - name: Copy Build Artifacts
-        run: scp -i ~/.ssh/ed25519 -r dist/df-23/* ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }}:/var/www/apps/logo-generator
+        run: scp -i ~/.ssh/ed25519 -r dist/gdg-logogen/* ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }}:/var/www/apps/logo-generator
 
