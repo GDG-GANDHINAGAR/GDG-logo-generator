@@ -41,6 +41,9 @@ jobs:
         run: scp -i ~/.ssh/ed25519 -r dist/gdg-logogen/* ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }}:/var/www/apps/logo-generator
 
 
+      - name: Install PM2
+        run: npm install -g pm2
+
       - name: Execute script on remote server
         uses: appleboy/ssh-action@v0.1.5
         with:
