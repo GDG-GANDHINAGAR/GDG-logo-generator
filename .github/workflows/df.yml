@@ -42,7 +42,7 @@ jobs:
 
 
       - name: Execute script on remote server
-        uses: appleboy/ssh-action@v2
+        uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.DF_HOST }}
           username: ${{ secrets.DF_USER }}
