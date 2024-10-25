@@ -52,4 +52,5 @@ jobs:
           key: ${{ secrets.DF_PKEY }}
           script: |
             cd /var/www
+            ls
             bash install.sh
