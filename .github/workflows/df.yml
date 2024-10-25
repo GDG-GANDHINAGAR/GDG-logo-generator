@@ -39,18 +39,6 @@ jobs:
 
       - name: Copy Build Artifacts
         run: scp -i ~/.ssh/ed25519 -r dist/gdg-logogen/* ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }}:/var/www/apps/logo-generator
+      - name: Deploy and Restart Server
+        run: ssh -i ~/.ssh/ed25519 ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }} 'bash /var/www/install.sh'
 
-
-      - name: Install PM2
-        run: npm install -g pm2
-
-      - name: Execute script on remote server
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.DF_HOST }}
-          username: ${{ secrets.DF_USER }}
-          key: ${{ secrets.DF_PKEY }}
-          script: |
-            cd /var/www
-            ls
-            bash install.sh
