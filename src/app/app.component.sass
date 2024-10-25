@@ -1,16 +1,37 @@
-.wrapper
+main
+  min-height: 100vh
+  position: relative
+  display: grid
+  grid-template-rows: auto 1fr auto
+  height: 100vh
+  gap: 20px
+
+footer
+  height: 50px
+  border-top: 3px solid #000
+  width: 100%
   display: flex
   justify-content: center
   align-items: center
+  background: #ffeadf
+
+.wrapper
+  display: flex
+  justify-content: center
+  //align-items: center
+  width: 100%
   max-width: 1200px
   gap: 20px
   margin: auto
+  padding: 10px
+  box-sizing: border-box
 
   @media(max-width: 600px)
     flex-direction: column
 
   .logo-wrap
     flex: 0.7
+
     @media(max-width: 600px)
       width: 100%
       flex: 1
@@ -21,3 +42,11 @@
     @media(max-width: 600px)
       width: 100%
       flex: 1
+
+.gdg-logo
+  height: 100px
+  width: 100%
+  object-fit: contain
+  margin: 20px 0
+  padding: 10px
+  box-sizing: border-box

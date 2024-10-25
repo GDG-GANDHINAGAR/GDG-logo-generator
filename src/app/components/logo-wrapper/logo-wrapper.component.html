@@ -1,11 +1,16 @@
+
 <mat-card appearance="outlined">
 
   <div class="logo" #wrapper>
     @if (config.name) {
-      <app-gdg-normal [config]="config" (onConfigChange)="onConfigChange($event)"></app-gdg-normal>
+      @if (config.alignment == LOGO_ALIGNMENT.CENTER) {
+        <app-gdg-normal [config]="config" (onConfigChange)="onConfigChange($event)"></app-gdg-normal>
+      } @else {
+        <app-gdg-inline [config]="config" (onConfigChange)="onConfigChange($event)"></app-gdg-inline>
+      }
     }
-    <div class="canvas-wrap" >
-      @if (isBrowser) {
+    <div class="canvas-wrap">
+      @if (isBrowser && config.alignment) {
         <canvas #canvas [height]="wrapper.clientHeight*2" [width]="wrapper.clientWidth*2"></canvas>
       }
     </div>

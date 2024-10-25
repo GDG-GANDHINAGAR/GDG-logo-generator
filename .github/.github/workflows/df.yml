@@ -1,0 +1,42 @@
+name: DF workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      OVERRIDE_BRANCH: ''
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get Branch
+        id: bname
+        uses: tj-actions/branch-names@v8
+      - name: Set Branch Name
+        id: set-branch
+        run: |
+          if [ -z "${{ env.OVERRIDE_BRANCH }}" ]; then
+            echo "BRANCH_NAME=${{ steps.bname.outputs.current_branch }}" >> $GITHUB_ENV
+          else
+            echo "BRANCH_NAME=${{ env.OVERRIDE_BRANCH }}" >> $GITHUB_ENV
+          fi
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Apps
+        run: |
+          npm run build
+
+      - name: Setup SSH Credentials
+        run: |
+          env
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DF_PKEY }}" > ~/.ssh/ed25519
+          chmod 600 ~/.ssh/ed25519
+          ssh-keyscan -p 22 -t ed25519 ${{ secrets.DF_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copy Build Artifacts
+        run: scp -i ~/.ssh/ed25519 -r dist/df-23/* ${{ secrets.DF_USER }}@${{ secrets.DF_HOST }}:/var/www/apps/logo-generator
+

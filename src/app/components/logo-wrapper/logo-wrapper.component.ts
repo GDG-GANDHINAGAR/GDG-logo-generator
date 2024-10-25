@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, Renderer2, ViewChild} from '@angular/core';
 import {ConfigService} from "../../services/config.service";
-import {ConfigType} from "../../constants/types";
+import {ConfigType, LOGO_ALIGNMENT} from "../../constants/types";
 import {Communities} from "../../constants/enums";
 import {GdgNormalComponent} from "../logos/gdg-normal/gdg-normal.component";
 import {MatCard} from "@angular/material/card";
 import {CanvasModule, WaCanvas2d, WaCanvasDrawImage} from "@ng-web-apis/canvas";
 import {isPlatformBrowser} from "@angular/common";
+import {GdgInlineComponent} from "../logos/gdg-inline/gdg-inline.component";
 
 @Component({
   selector: 'app-logo-wrapper',
@@ -13,6 +14,7 @@ import {isPlatformBrowser} from "@angular/common";
   imports: [
     GdgNormalComponent,
     MatCard,
+    GdgInlineComponent,
   ],
   templateUrl: './logo-wrapper.component.html',
   styleUrl: './logo-wrapper.component.sass'
@@ -40,14 +42,16 @@ export class LogoWrapperComponent implements AfterViewInit {
     })
   }
 
+
+
   onConfigChange(node: ElementRef) {
     if (!node) return;
     this.nodeRef = node;
-
   }
 
   drawImage() {
     if (!this.nodeRef) return;
+    if (!this.isBrowser) return;
     const svgString = new XMLSerializer().serializeToString(this.nodeRef.nativeElement)
     this.blob = new Blob([svgString], {
       type: 'image/svg+xml;charset=utf-8'
@@ -89,4 +93,5 @@ export class LogoWrapperComponent implements AfterViewInit {
     }));
   }
 
+  protected readonly LOGO_ALIGNMENT = LOGO_ALIGNMENT;
 }

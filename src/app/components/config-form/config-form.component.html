@@ -7,10 +7,18 @@
         <input matInput formControlName="name">
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Comunity food</mat-label>
+        <mat-label>Community</mat-label>
         <mat-select formControlName="type">
           @for (community of communities; track community) {
             <mat-option [value]="community.value">{{ community.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Logo Alignment</mat-label>
+        <mat-select formControlName="alignment">
+          @for (alignment of alignments; track alignment) {
+            <mat-option [value]="alignment.value">{{ alignment.name }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

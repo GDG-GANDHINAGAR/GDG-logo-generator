@@ -11,6 +11,7 @@ import {AsyncPipe} from "@angular/common";
 import {ConfigService} from "../../services/config.service";
 import {MatButton} from "@angular/material/button";
 import {DefaultConfig} from "../../constants/defaults";
+import {LOGO_ALIGNMENT} from "../../constants/types";
 
 @Component({
   selector: 'app-config-form',
@@ -29,10 +30,22 @@ export class ConfigFormComponent {
       value: Communities.GDGC
     },
   ]
+
+   alignments = [
+    {
+      name: 'Center',
+      value: LOGO_ALIGNMENT.CENTER
+    },{
+      name: 'Inline',
+      value: LOGO_ALIGNMENT.INLINE
+     },
+  ]
+
   monoChrome: any;
   form: FormGroup = new FormGroup({
     name: new FormControl(DefaultConfig.name,),
     type: new FormControl(DefaultConfig.type),
+    alignment: new FormControl(DefaultConfig.alignment),
     isMonochrome: new FormControl(DefaultConfig.isMonochrome),
     color: new FormControl(DefaultConfig.color),
     bgColor: new FormControl(DefaultConfig.bgColor),
