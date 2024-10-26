@@ -22,6 +22,8 @@ import {GdgInlineComponent} from "../logos/gdg-inline/gdg-inline.component";
 export class LogoWrapperComponent implements AfterViewInit {
   @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('wrapper') wrapper: ElementRef<HTMLDivElement>;
+  canvasHeight = 0;
+  canvasWidth = 0;
   context: CanvasRenderingContext2D;
   config: ConfigType & any = {}
   protected readonly Communities = Communities;
@@ -33,6 +35,7 @@ export class LogoWrapperComponent implements AfterViewInit {
     this.isBrowser = isPlatformBrowser(platformId);
     this.configService.getConfig.subscribe(change => {
       this.config = change;
+      console.log(change)
       setTimeout(_ => {
         this.drawImage()
       }, 1000)
@@ -43,10 +46,12 @@ export class LogoWrapperComponent implements AfterViewInit {
   }
 
 
-
   onConfigChange(node: ElementRef) {
     if (!node) return;
     this.nodeRef = node;
+    this.canvasHeight = node.nativeElement.height.baseVal.value
+    this.canvasWidth = node.nativeElement.width.baseVal.value;
+
   }
 
   drawImage() {
