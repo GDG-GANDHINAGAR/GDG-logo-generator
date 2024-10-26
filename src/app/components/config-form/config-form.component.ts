@@ -23,10 +23,10 @@ import {LOGO_ALIGNMENT} from "../../constants/types";
 export class ConfigFormComponent {
   communities = [
     {
-      name: 'Google developer Groups',
+      name: 'Google Developer Groups',
       value: Communities.GDG
     }, {
-      name: 'Google developer Groups Cloud',
+      name: 'Google Developer Groups Cloud',
       value: Communities.GDGC
     },
   ]
