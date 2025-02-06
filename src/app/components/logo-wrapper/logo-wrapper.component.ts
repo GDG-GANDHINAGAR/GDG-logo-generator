@@ -35,7 +35,6 @@ export class LogoWrapperComponent implements AfterViewInit {
     this.isBrowser = isPlatformBrowser(platformId);
     this.configService.getConfig.subscribe(change => {
       this.config = change;
-      console.log(change)
       setTimeout(_ => {
         this.drawImage()
       }, 1000)
@@ -49,8 +48,8 @@ export class LogoWrapperComponent implements AfterViewInit {
   onConfigChange(node: ElementRef) {
     if (!node) return;
     this.nodeRef = node;
-    this.canvasHeight = node.nativeElement.height.baseVal.value
-    this.canvasWidth = node.nativeElement.width.baseVal.value;
+    this.canvasHeight = node.nativeElement.height?.baseVal.value
+    this.canvasWidth = node.nativeElement.width?.baseVal.value;
 
   }
 
